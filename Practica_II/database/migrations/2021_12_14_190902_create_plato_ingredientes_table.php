@@ -14,10 +14,13 @@ class CreatePlatoIngredientesTable extends Migration
     public function up()
     {
         Schema::create('plato_ingredientes', function (Blueprint $table) {
-            
+
             $table->bigInteger('id_ingredientes');
-            $table->bigInteger('id_tipo_plates');
+            $table->bigInteger('id_plates');
             $table->timestamps();
+            $table->foreign('id_ingredientes')->references('id')->on('ingredientes')->onDelete('cascade');
+            $table->foreign('id_plates')->references('id')->on('plates')->onDelete('cascade');
+            $table->unique(['id_plates', 'id_ingredientes']);
         });
     }
 
